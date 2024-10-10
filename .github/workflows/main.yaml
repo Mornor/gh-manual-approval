@@ -1,0 +1,24 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  dev-deployment:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+    - name: Dev Deployment
+      run: echo "Deploying to dev environment"
+
+  prod-deployment:
+    needs: dev-deployment
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+    - name: Prod Deployment
+      run: echo "Deploying to prod environment"
